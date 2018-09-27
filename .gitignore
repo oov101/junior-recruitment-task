@@ -1,0 +1,8 @@
+# VSCode settings
+.vscode
+
+# Dependency directories
+node_modules
+
+# CSS files (postinstall create .css files automatically)
+css

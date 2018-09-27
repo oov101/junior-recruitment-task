@@ -1,0 +1,36 @@
+{
+  "name": "junior-recruitment-task",
+  "version": "1.0.0",
+  "description": "Realizacja prostej listy ToDo (lista zadań do zrobienia) jako aplikacji internetowej, z wykorzystaniem HTML5 po stronie frontendu i dowolnej technologi po stronie backendu. Aplikacja umożliwia dodawanie, przeglądanie i oznaczanie jako wykonane różnych zadań.\r Dla backendu możemy skorzystać z gotowego API",
+  "main": "index.js",
+  "scripts": {
+    "postinstall": "npm run sass",
+    "start": "concurrently \"npm:reload\" \"npm:sass-watch\" \"npm:docs\" \"npm:server\"",
+    "reload": "reload -d frontend -b",
+    "sass": "node-sass frontend/styles/scss -o frontend/styles/css",
+    "sass-watch": "node-sass -w frontend/styles/scss -o frontend/styles/css",
+    "docs": "documentation serve --watch frontend/scripts/ backend/",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oov101/junior-recruitment-task.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oov101/junior-recruitment-task/issues"
+  },
+  "homepage": "https://github.com/oov101/junior-recruitment-task#readme",
+  "devDependencies": {
+    "concurrently": "^4.0.1",
+    "node-sass": "^4.9.3",
+    "nodemon": "^1.18.4",
+    "reload": "^2.3.1"
+  },
+  "dependencies": {
+    "express": "^4.16.3",
+    "mongodb": "^3.1.6"
+  }
+}
