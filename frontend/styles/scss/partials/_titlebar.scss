@@ -1,0 +1,25 @@
+.title-bar {
+  width: 320px;
+  height: 36px;
+  background-color: $title-bar-background;
+  color: $title-text;
+  position: relative;
+
+  .title-bar-separator {
+    margin-left: 29px;
+    width: 5px;
+    height: inherit;
+    display: inline-block;
+    border-left: 1px solid $title-bar-separator;
+    border-right: 1px solid $title-bar-separator;
+  }
+
+  p {
+    display: inline;
+    font-size: 14px;
+    position: absolute;
+    left: 43px;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+}

@@ -1,6 +1,9 @@
 @import 'partials/reset';
 @import 'partials/variables';
+@import 'partials/titlebar';
+@import 'partials/task';
+@import 'partials/inputbar';
 
-h1 {
-  color: $scss-is-working;
+.app {
+  display: inline-block;
 }

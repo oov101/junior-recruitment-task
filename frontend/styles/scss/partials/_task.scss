@@ -1,0 +1,76 @@
+.task {
+  position: relative;
+  height: 30px;
+  width: 320px;
+  border-left: 1px solid $app-frame-border;
+  border-right: 1px solid $app-frame-border;
+  font-size: 12px;
+  color: $todo-task;
+
+  .checker {
+    display: inline-block;
+    width: 28px;
+    height: 29px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../../../assets/todo-checkbox.png);
+  }
+
+  .task-bar-separator {
+    position:absolute;
+    left: 28px;
+    width: 5px;
+    height: 31px;
+    display: inline-block;
+    border-left: 1px solid $task-bar-separator;
+    border-right: 1px solid $task-bar-separator;
+    z-index: 2;
+  }
+
+  p {
+    position: absolute;
+    left: 43px;
+    top: 50%;
+    transform: translate(0, -50%);
+  }
+
+  .trash {
+    position: absolute;
+    top: 50%;
+    right: 12px;
+    transform: translate(0, -50%);
+    height: 12px;
+    width: 11px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url(../../../assets/trash-black.png);
+  }
+}
+
+.task:after {
+  content: '';
+  position: absolute;
+  top: 29px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: $task-bottom-border;
+  z-index: 1;
+}
+
+.done {
+  .checker {
+    background-image: url(../../../assets/done-checkbox.png);
+  }
+
+  .content > p {
+    color: $done-task;
+    text-decoration: line-through;
+  }
+
+  .trash {
+    background-image: url(../../../assets/trash-gray.png);
+  }
+}
