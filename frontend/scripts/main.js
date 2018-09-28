@@ -86,23 +86,29 @@ class ToDoApp {
    * @return {Element}
    */
   createTaskNode(id, isDone, contents) {
-    const taskNode = document.createElement('div');
-    let taskStatusClass = 'to-do';
+    let taskStatusClass = '';
 
     if (isDone) {
       taskStatusClass = 'done';
     }
 
-    taskNode.innerHTML = `
-      <div id=${id} class="task ${taskStatusClass}">
-        <div class="checker"></div>
-        <div class="task-bar-separator"></div>
-        <div class="content">
-          <p>${contents}</p>
-        </div>
-        <div class="trash"></div>
-      </div>
-    `;
+    const taskNode = document.createElement('div');
+    const checkerNode = document.createElement('div');
+    const taskBarSeparatorNode = document.createElement('div');
+    const taskContentsContainerNode = document.createElement('div');
+    const taskContentsNode = document.createElement('p');
+    const trashNode = document.createElement('div');
+
+    taskNode.setAttribute('id', `${id}`);
+    taskNode.className = `task ${taskStatusClass}`;
+    checkerNode.className = 'checker';
+    taskBarSeparatorNode.className = 'task-bar-separator';
+    taskContentsContainerNode.className = 'content';
+    trashNode.className = 'trash';
+    taskContentsNode.innerHTML = contents;
+
+    taskNode.append(checkerNode, taskBarSeparatorNode, taskContentsContainerNode, trashNode);
+    taskContentsContainerNode.appendChild(taskContentsNode);
 
     return taskNode;
   }
