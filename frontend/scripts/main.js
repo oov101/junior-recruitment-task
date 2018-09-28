@@ -44,15 +44,32 @@ class ToDoApp {
    */
   createInputBar() {
     const inputBarNode = document.createElement('div');
-    inputBarNode.setAttribute('class', 'input-bar');
+    const addTaskNode = document.createElement('div');
+    const taskBarSeparatorNode = document.createElement('div');
+    const inputNode = document.createElement('input');
 
-    inputBarNode.innerHTML = `
-      <div class="task">
-        <div class="add-task"></div>
-        <div class="task-bar-separator"></div>
-        <input type="text" name="taks-contents">
-      </div>
-    `;
+    inputBarNode.classList = 'input-bar task';
+    addTaskNode.classList = 'add-task';
+    taskBarSeparatorNode.classList = 'task-bar-separator';
+
+    inputBarNode.append(addTaskNode, taskBarSeparatorNode, inputNode);
+    
+    addTaskNode.addEventListener('click', () => {
+      var data = {isDone: false, contents: inputNode.value};
+
+      fetch('http://localhost:3000/to-do-list/backend/new_task', {
+        method: 'POST',
+        body: JSON.stringify(data),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error))
+      .then(() => this.getTasks());
+
+      inputNode.value = "";
+    });
 
     this.appNode.appendChild(inputBarNode);
   }
@@ -73,6 +90,7 @@ class ToDoApp {
    * @param {Array} tasks 
    */
   renderTasks(tasks) {
+    this.tasksContainer.innerHTML = "";
     tasks.forEach(task => {
       this.tasksContainer.appendChild(this.createTaskNode(task._id, task.isDone, task.contents));
     });
@@ -109,6 +127,19 @@ class ToDoApp {
 
     taskNode.append(checkerNode, taskBarSeparatorNode, taskContentsContainerNode, trashNode);
     taskContentsContainerNode.appendChild(taskContentsNode);
+
+    checkerNode.addEventListener('click', () => {
+      this.getTasks();
+    });
+
+    trashNode.addEventListener('click', () => {
+      fetch(`http://localhost:3000/to-do-list/backend/${id}`, {
+        method: 'DELETE',
+      }).then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error))
+      .then(() => this.getTasks()); 
+    });
 
     return taskNode;
   }
