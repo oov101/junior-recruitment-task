@@ -8,7 +8,7 @@
     "start": "concurrently \"npm:reload\" \"npm:sass-watch\" \"npm:docs\" \"npm:server\"",
     "reload": "reload -d frontend -b",
     "sass": "node-sass frontend/styles/scss -o frontend/styles/css",
-    "sass-watch": "node-sass -w frontend/styles/scss -o frontend/styles/css",
+    "sass-watch": "node-sass -w frontend/styles/scss/* -o frontend/styles/css",
     "docs": "documentation serve --watch frontend/scripts/ backend/",
     "server": "nodemon backend/server.js"
   },
