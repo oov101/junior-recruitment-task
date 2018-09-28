@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", (e) => {
 
 /**
  * This is To-Do List Application
+ * @param {String} title
  */
 class ToDoApp {
   constructor(title) {
@@ -57,7 +58,7 @@ class ToDoApp {
   }
 
   /**
-   * Get tasks from server as object from JSON
+   * Get tasks from server
    */
   getTasks() {
     fetch('http://localhost:3000/to-do-list/backend/tasks')
