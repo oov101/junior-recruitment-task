@@ -46,8 +46,9 @@ class ToDoApp {
     inputBarNode.setAttribute('class', 'input-bar');
 
     inputBarNode.innerHTML = `
-      <div class="add-task"></div>
-      <div>
+      <div class="task">
+        <div class="add-task"></div>
+        <div class="task-bar-separator"></div>
         <input type="text" name="taks-contents">
       </div>
     `;
@@ -94,6 +95,7 @@ class ToDoApp {
     taskNode.innerHTML = `
       <div id=${id} class="task ${taskStatusClass}">
         <div class="checker"></div>
+        <div class="task-bar-separator"></div>
         <div class="content">
           <p>${contents}</p>
         </div>
