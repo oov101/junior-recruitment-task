@@ -129,7 +129,18 @@ class ToDoApp {
     taskContentsContainerNode.appendChild(taskContentsNode);
 
     checkerNode.addEventListener('click', () => {
-      this.getTasks();
+      var data = {isDone: !isDone};
+
+      fetch(`http://localhost:3000/to-do-list/backend/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers:{
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+      .then(response => console.log('Success:', JSON.stringify(response)))
+      .catch(error => console.error('Error:', error))
+      .then(() => this.getTasks());
     });
 
     trashNode.addEventListener('click', () => {
@@ -140,6 +151,8 @@ class ToDoApp {
       .catch(error => console.error('Error:', error))
       .then(() => this.getTasks()); 
     });
+
+    
 
     return taskNode;
   }
