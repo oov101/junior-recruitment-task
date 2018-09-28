@@ -53,20 +53,20 @@ class ToDoApp {
     taskBarSeparatorNode.classList = 'task-bar-separator';
 
     inputBarNode.append(addTaskNode, taskBarSeparatorNode, inputNode);
-    
+
     addTaskNode.addEventListener('click', () => {
-      var data = {isDone: false, contents: inputNode.value};
+      const data = { isDone: false, contents: inputNode.value };
 
       fetch('http://localhost:3000/to-do-list/backend/new_task', {
         method: 'POST',
         body: JSON.stringify(data),
-        headers:{
+        headers: {
           'Content-Type': 'application/json'
         }
       }).then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error))
-      .then(() => this.getTasks());
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
+        .then(() => this.getTasks());
 
       inputNode.value = "";
     });
@@ -118,6 +118,7 @@ class ToDoApp {
     const trashNode = document.createElement('div');
 
     taskNode.setAttribute('id', `${id}`);
+    taskContentsNode.setAttribute('contenteditable', 'true');
     taskNode.className = `task ${taskStatusClass}`;
     checkerNode.className = 'checker';
     taskBarSeparatorNode.className = 'task-bar-separator';
@@ -128,31 +129,43 @@ class ToDoApp {
     taskNode.append(checkerNode, taskBarSeparatorNode, taskContentsContainerNode, trashNode);
     taskContentsContainerNode.appendChild(taskContentsNode);
 
+    taskContentsNode.addEventListener('focusout', () => {
+      const data = {contents: taskContentsNode.innerText};
+      fetch(`http://localhost:3000/to-do-list/backend/${id}`, {
+        method: 'PUT',
+        body: JSON.stringify(data),
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      }).then(res => res.json())
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
+        .then(() => this.getTasks());
+    });
+
     checkerNode.addEventListener('click', () => {
-      var data = {isDone: !isDone};
+      const data = { isDone: !isDone };
 
       fetch(`http://localhost:3000/to-do-list/backend/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
-        headers:{
+        headers: {
           'Content-Type': 'application/json'
         }
       }).then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error))
-      .then(() => this.getTasks());
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
+        .then(() => this.getTasks());
     });
 
     trashNode.addEventListener('click', () => {
       fetch(`http://localhost:3000/to-do-list/backend/${id}`, {
         method: 'DELETE',
       }).then(res => res.json())
-      .then(response => console.log('Success:', JSON.stringify(response)))
-      .catch(error => console.error('Error:', error))
-      .then(() => this.getTasks()); 
+        .then(response => console.log('Success:', JSON.stringify(response)))
+        .catch(error => console.error('Error:', error))
+        .then(() => this.getTasks());
     });
-
-    
 
     return taskNode;
   }
