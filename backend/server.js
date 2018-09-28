@@ -20,8 +20,8 @@ db.once('open', function() {
 });
 
 var taskSchema = new mongoose.Schema({
-  isDone: String,
-  task: String
+  isDone: Boolean,
+  contents: String
 });
 
 var Task = mongoose.model('Task', taskSchema);
