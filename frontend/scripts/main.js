@@ -9,7 +9,20 @@ class ToDoApp {
   constructor(title) {
     this.appNode = document.getElementsByClassName('app')[0];
     this.createTitleBar(title);
+    this.tasksContainer = this.createTaskContainer();
+    this.createInputBar();
     this.getTasks();
+  }
+
+  /**
+   * Creates tasks container for all tasks
+   * @return {Element}
+   */
+  createTaskContainer() {
+    const tasksContainer = document.createElement('div');
+    tasksContainer.setAttribute('class', 'tasks-container');
+    this.appNode.appendChild(tasksContainer);
+    return tasksContainer;
   }
 
   /**
@@ -26,6 +39,23 @@ class ToDoApp {
   }
 
   /**
+   * Create input bar for task adding
+   */
+  createInputBar() {
+    const inputBarNode = document.createElement('div');
+    inputBarNode.setAttribute('class', 'input-bar');
+
+    inputBarNode.innerHTML = `
+      <div class="add-task"></div>
+      <div>
+        <input type="text" name="taks-contents">
+      </div>
+    `;
+
+    this.appNode.appendChild(inputBarNode);
+  }
+
+  /**
    * Get tasks from server as object from JSON
    */
   getTasks() {
@@ -37,12 +67,12 @@ class ToDoApp {
   }
 
   /**
-   * Render tasks to app container
+   * Render tasks to tasks container
    * @param {Array} tasks 
    */
   renderTasks(tasks) {
     tasks.forEach(task => {
-      this.appNode.appendChild(this.createTaskNode(task._id, task.isDone, task.contents));
+      this.tasksContainer.appendChild(this.createTaskNode(task._id, task.isDone, task.contents));
     });
   }
 
