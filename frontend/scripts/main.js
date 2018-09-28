@@ -1,14 +1,28 @@
 document.addEventListener("DOMContentLoaded", (e) => {
-  new ToDoApp();
+  new ToDoApp('ToDo List');
 });
 
 /**
  * This is To-Do List Application
  */
 class ToDoApp {
-  constructor() {
+  constructor(title) {
     this.appNode = document.getElementsByClassName('app')[0];
+    this.createTitleBar(title);
     this.getTasks();
+  }
+
+  /**
+   * Create title bar for to-do list
+   * @param {String} title 
+   */
+  createTitleBar(title) {
+    this.appNode.innerHTML = `
+      <div class="title-bar">
+        <div class="title-bar-separator"></div>
+        <p>${title}</p>
+      </div>
+    `;
   }
 
   /**
@@ -50,7 +64,9 @@ class ToDoApp {
     taskNode.innerHTML = `
       <div id=${id} class="task ${taskStatusClass}">
         <div class="checker"></div>
-        <div class="content">${contents}</div>
+        <div class="content">
+          <p>${contents}</p>
+        </div>
         <div class="trash"></div>
       </div>
     `;
