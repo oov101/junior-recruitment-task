@@ -14,7 +14,7 @@
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(../../../assets/todo-checkbox.png);
+    background-image: url(../../assets/todo-checkbox.png);
   }
 
   .task-bar-separator {
@@ -45,7 +45,7 @@
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center;
-    background-image: url(../../../assets/trash-black.png);
+    background-image: url(../../assets/trash-black.png);
   }
 }
 
@@ -62,7 +62,7 @@
 
 .done {
   .checker {
-    background-image: url(../../../assets/done-checkbox.png);
+    background-image: url(../../assets/done-checkbox.png);
   }
 
   .content > p {
@@ -71,6 +71,6 @@
   }
 
   .trash {
-    background-image: url(../../../assets/trash-gray.png);
+    background-image: url(../../assets/trash-gray.png);
   }
 }
