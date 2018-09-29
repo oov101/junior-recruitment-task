@@ -48,12 +48,12 @@ class ToDoApp {
   }
 
   /**
-   * CRUDTemplate with view rerender
+   * fetchTemplate with view rerender
    * @param {String} link 
    * @param {Object} data 
    * @param {String} method 
    */
-  CRUDTemplate(link, data, method) {
+  fetchTemplate(link, data, method) {
     fetch(`http://localhost:3000/to-do-list/backend/${link}`, {
       method: `${method}`,
       body: JSON.stringify(data),
@@ -94,7 +94,7 @@ class ToDoApp {
   createNewTask() {
     if (this.inputNode.value.length === 0) return;
     const newTask = { isDone: false, contents: this.inputNode.value };
-    this.CRUDTemplate('new_task', newTask, 'POST');
+    this.fetchTemplate('new_task', newTask, 'POST');
     this.inputNode.value = "";
   }
 
@@ -103,7 +103,7 @@ class ToDoApp {
    * @param {Number} id 
    */
   deleteTask(id) {
-    this.CRUDTemplate(id, undefined, 'DELETE');
+    this.fetchTemplate(id, undefined, 'DELETE');
   }
 
   /**
@@ -112,7 +112,7 @@ class ToDoApp {
    * @param {Boolean} isDone 
    */
   toggleTask(id, isDone) {
-    this.CRUDTemplate(id, { isDone: !isDone }, 'PUT');
+    this.fetchTemplate(id, { isDone: !isDone }, 'PUT');
   }
 
   /**
@@ -125,7 +125,7 @@ class ToDoApp {
       this.getTasks();
       return;
     };
-    this.CRUDTemplate(id, { contents: newContents }, 'PUT');
+    this.fetchTemplate(id, { contents: newContents }, 'PUT');
   }
 
   /**
