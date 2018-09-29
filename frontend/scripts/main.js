@@ -136,61 +136,54 @@ class ToDoApp {
    * @return {Element}
    */
   createTaskNode(id, isDone, contents) {
+    const taskNode = document.createElement('div');
+    const checkerNode = document.createElement('div');
+    const taskBarSeparatorNode = document.createElement('div');
+    const taskContentsContainerNode = document.createElement('div');
+    const taskContentsNode = document.createElement('p');
+    const trashNode = document.createElement('div');
     let taskStatusClass = '';
 
-    /**
-     * Initialize taskbar elements 
-     */
-    const initTaskElements = () => {
-      this.taskNode = document.createElement('div');
-      this.checkerNode = document.createElement('div');
-      this.taskBarSeparatorNode = document.createElement('div');
-      this.taskContentsContainerNode = document.createElement('div');
-      this.taskContentsNode = document.createElement('p');
-      this.trashNode = document.createElement('div');
-    };
+    if (isDone) {
+      taskStatusClass = 'done';
+    }
 
     /**
      * Append Elements to proper parents
      */
     const moveTaskElementsDOM = () => {
-      this.taskNode.append(this.checkerNode, this.taskBarSeparatorNode, this.taskContentsContainerNode, this.trashNode);
-      this.taskContentsContainerNode.appendChild(this.taskContentsNode);
+      taskNode.append(checkerNode, taskBarSeparatorNode, taskContentsContainerNode, trashNode);
+      taskContentsContainerNode.appendChild(taskContentsNode);
     }
 
     /**
      * Setting id's and classes to elements
      */
     const setAttributesToTaskElements = () => {
-      this.taskNode.setAttribute('id', `${id}`);
-      this.taskContentsNode.setAttribute('contenteditable', 'true');
-      this.taskNode.className = `task ${taskStatusClass}`;
-      this.checkerNode.className = 'checker';
-      this.taskBarSeparatorNode.className = 'task-bar-separator';
-      this.taskContentsContainerNode.className = 'content';
-      this.trashNode.className = 'trash';
+      taskNode.setAttribute('id', `${id}`);
+      taskContentsNode.setAttribute('contenteditable', 'true');
+      taskNode.className = `task ${taskStatusClass}`;
+      checkerNode.className = 'checker';
+      taskBarSeparatorNode.className = 'task-bar-separator';
+      taskContentsContainerNode.className = 'content';
+      trashNode.className = 'trash';
     }
 
     /**
      * Adding event listeners for toggling, editing, deleting tasks
      */
     const addEventListenersToTaskElements = () => {
-      this.taskContentsNode.addEventListener('focusout', () => this.editTask(id, this.taskContentsNode.innerText));
-      this.checkerNode.addEventListener('click', () => this.toggleTask(id, isDone));
-      this.trashNode.addEventListener('click', () => this.deleteTask(id));
+      taskContentsNode.addEventListener('focusout', () => this.editTask(id, taskContentsNode.innerText));
+      checkerNode.addEventListener('click', () => this.toggleTask(id, isDone));
+      trashNode.addEventListener('click', () => this.deleteTask(id));
     };
 
-    if (isDone) {
-      taskStatusClass = 'done';
-    }
-
-    initTaskElements();
     moveTaskElementsDOM();
     setAttributesToTaskElements();
     addEventListenersToTaskElements();
 
-    this.taskContentsNode.innerHTML = contents;
+    taskContentsNode.innerHTML = contents;
 
-    return this.taskNode;
+    return taskNode;
   }
 }
