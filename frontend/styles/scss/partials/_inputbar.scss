@@ -1,28 +1,29 @@
 .input-bar {
   position: relative;
-
-  .task {
-    border-bottom: 1px solid $app-frame-border;
-  }
+  display: flex;
+  height: 30px;
+  border-bottom: 1px solid $app-frame-border;
+  border-left: 1px solid $app-frame-border;
+  border-right: 1px solid $app-frame-border;
 
   .add-task {
-    display: inline-block;
     width: 28px;
-    height: 29px;
     cursor: pointer;
     background-repeat: no-repeat;
     background-position: center;
     background-image: url(../../assets/add-button.png);
   }
 
+  .task-bar-separator {
+    width: 5px;
+    border-left: 1px solid $task-bar-separator;
+    border-right: 1px solid $task-bar-separator;
+  }
+
   input {
-    position: absolute;
-    left: 43px;
-    top: 50%;
-    transform: translate(0, -50%);
-    width: 250px;
-    height: 28px;
     border: none;
+    margin: 2px 10px;
+    flex: 2; 
   }
 
   input:focus {
@@ -33,9 +34,20 @@
 .input-bar:before {
   content: " ";
   position: absolute;
-  top: 30px;
-  left: 0;
-  right: 0;
-  bottom: -1px;
+  left: 28px;
+  bottom: -2px;
+  height: 2px;
+  width: 3px;
+  border-left: 1px solid $task-bar-separator;
+  border-right: 1px solid $task-bar-separator;
+  z-index: 1;
+}
+
+.input-bar:after {
+  content: " ";
+  position: absolute;
+  bottom: -2px;
+  width: 318px;
+  height: 1px;
   background-color: $todo-list-shadow;
 }

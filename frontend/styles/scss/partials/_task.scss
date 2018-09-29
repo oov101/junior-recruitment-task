@@ -1,80 +1,75 @@
-.task {
-  position: relative;
-  height: 30px;
-  width: 320px;
-  border-left: 1px solid $app-frame-border;
-  border-right: 1px solid $app-frame-border;
-  font-size: 12px;
-  color: $todo-task;
+.tasks-container {
+  .task {
+    position: relative;
+    min-height: 30px;
+    display: flex;
+    border-left: 1px solid $app-frame-border;
+    border-right: 1px solid $app-frame-border;
+    color: $todo-task;
 
-  .checker {
-    display: inline-block;
-    width: 28px;
-    height: 29px;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url(../../assets/todo-checkbox.png);
+    .checker {
+      display: inline-block;
+      width: 28px;
+      background-image: url(../../assets/todo-checkbox.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      cursor: pointer;
+    }
+
+    .task-bar-separator {
+      width: 5px;
+      border-left: 1px solid $task-bar-separator;
+      border-right: 1px solid $task-bar-separator;
+      z-index: 1;
+    }
+
+    .content {
+      display: flex;
+      width: 260px;
+      align-items: center;
+      
+
+      p {
+        margin-left: 10px;
+        margin: 6px 5px 6px 10px;
+      }
+    }
+
+    .trash {
+      width: 11px;
+      margin: 0 12px 0 auto;
+      cursor: pointer;
+      background-repeat: no-repeat;
+      background-position: center;
+      background-image: url(../../assets/trash-black.png);
+    }
   }
 
-  .task-bar-separator {
-    position:absolute;
-    left: 28px;
-    width: 5px;
-    height: 31px;
-    display: inline-block;
-    border-left: 1px solid $task-bar-separator;
-    border-right: 1px solid $task-bar-separator;
-    z-index: 2;
+  .done {
+    .checker {
+      background-image: url(../../assets/done-checkbox.png);
+    }
+  
+    .content > p {
+      color: $done-task;
+      text-decoration: line-through;
+    }
+  
+    .trash {
+      background-image: url(../../assets/trash-gray.png);
+    }
   }
 
-  p {
+  .task:after {
+    content: '';
     position: absolute;
-    left: 43px;
-    top: 50%;
-    transform: translate(0, -50%);
+    bottom: 0;
+    width: 318px;
+    height: 1px;
+    background: $task-bottom-border;
   }
 
-  .trash {
-    position: absolute;
-    top: 50%;
-    right: 12px;
-    transform: translate(0, -50%);
-    height: 12px;
-    width: 11px;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-position: center;
-    background-image: url(../../assets/trash-black.png);
+  [contenteditable]:focus {
+    outline: 0px solid transparent;
   }
-}
-
-.task:after {
-  content: '';
-  position: absolute;
-  top: 29px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: $task-bottom-border;
-  z-index: 1;
-}
-
-.done {
-  .checker {
-    background-image: url(../../assets/done-checkbox.png);
-  }
-
-  .content > p {
-    color: $done-task;
-    text-decoration: line-through;
-  }
-
-  .trash {
-    background-image: url(../../assets/trash-gray.png);
-  }
-}
-
-[contenteditable]:focus {
-  outline: 0px solid transparent;
 }
