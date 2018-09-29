@@ -13,6 +13,8 @@ app.use(function (req, res, next) {
 app.use(express.json())
 app.use('/to-do-list/frontend', express.static('frontend'))
 
+
+
 // Conecting to database
 mongoose.connect('mongodb://user:user123@ds215563.mlab.com:15563/qunabu-junior-recruitment-task', { useNewUrlParser: true });
 var db = mongoose.connection;
@@ -76,5 +78,8 @@ app.delete('/to-do-list/backend/:task_id', (req, res, next) => {
   });
 })
 
+app.get('*', function(req, res) {
+  res.redirect('/to-do-list/frontend/');
+});
 
 app.listen(port, () => console.log(`Back-End server on port ${port}`))
