@@ -40,7 +40,8 @@ app.get('/to-do-list/backend', function (req, re, next) {
 })
 
 app.post('/to-do-list/backend/new_task', (req, res, next) => {
-  console.log(req.body)
+  if (!req.body.contents) return;
+
   const newTask = new Task(req.body);
   newTask.save(err => {
     if (err) return res.status(500).send(err);
@@ -50,6 +51,7 @@ app.post('/to-do-list/backend/new_task', (req, res, next) => {
 
 app.put('/to-do-list/backend/:task_id', (req, res, next) => {
   console.log(req.params.task_id, req.body);
+  if (!req.body.contents) return;
 
   Task.findById(req.params.task_id, function (err, task) {
     if (err) return handleError(err);

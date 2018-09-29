@@ -55,6 +55,7 @@ class ToDoApp {
     inputBarNode.append(addTaskNode, taskBarSeparatorNode, inputNode);
 
     addTaskNode.addEventListener('click', () => {
+      if (inputNode.value.length === 0) return;
       const data = { isDone: false, contents: inputNode.value };
 
       fetch('http://localhost:3000/to-do-list/backend/new_task', {
@@ -130,7 +131,13 @@ class ToDoApp {
     taskContentsContainerNode.appendChild(taskContentsNode);
 
     taskContentsNode.addEventListener('focusout', () => {
+      if (taskContentsNode.innerText.length === 0) {
+        this.getTasks();
+        return;
+      };
+
       const data = {contents: taskContentsNode.innerText};
+
       fetch(`http://localhost:3000/to-do-list/backend/${id}`, {
         method: 'PUT',
         body: JSON.stringify(data),
