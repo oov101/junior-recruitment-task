@@ -1,3 +1,7 @@
+Aby uruchomić wersję developerską:
+1. npm i
+2. npm run start
+
 # Zadanie dla Junior Developera
 
 Realizacja prostej listy ToDo (lista zadań do zrobienia) jako aplikacji internetowej, z wykorzystaniem HTML5 po stronie frontendu i dowolnej technologi po stronie backendu. Aplikacja umożliwia dodawanie, przeglądanie i oznaczanie jako wykonane różnych zadań.
