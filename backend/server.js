@@ -50,8 +50,9 @@ app.post('/to-do-list/backend/new_task', (req, res, next) => {
 })
 
 app.put('/to-do-list/backend/:task_id', (req, res, next) => {
-  console.log(req.params.task_id, req.body);
-  if (!req.body.contents) return;
+  if (req.body.contents !== undefined && req.body.contents.length === 0) {
+    return;
+  };
 
   Task.findById(req.params.task_id, function (err, task) {
     if (err) return handleError(err);
@@ -65,7 +66,6 @@ app.put('/to-do-list/backend/:task_id', (req, res, next) => {
 })
 
 app.delete('/to-do-list/backend/:task_id', (req, res, next) => {
-  console.log(req.params.task_id);
   Task.findByIdAndRemove(req.params.task_id, (err, task) => {
     if (err) return res.status(500).send(err);
     const response = {
