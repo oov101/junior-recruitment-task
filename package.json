@@ -25,6 +25,7 @@
   "homepage": "https://github.com/oov101/junior-recruitment-task#readme",
   "devDependencies": {
     "concurrently": "^4.0.1",
+    "documentation": "^8.1.2",
     "node-sass": "^4.9.3",
     "nodemon": "^1.18.4",
     "reload": "^2.3.1"
