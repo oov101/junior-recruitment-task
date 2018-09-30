@@ -33,6 +33,9 @@ class ToDoApp {
     this.appNode.appendChild(this.inputBarNode);
 
     this.addTaskNode.addEventListener('click', () => this.createNewTask());
+    this.inputNode.addEventListener('focus', () => this.inputNode.placeholder = '');
+
+    this.regExpNotWordCharNoDigits = /^$|^[\W\d]/;
   }
 
   /**
@@ -92,7 +95,10 @@ class ToDoApp {
   * Validates and creates new task, clears input field after all
   */
   createNewTask() {
-    if (this.inputNode.value.length === 0) return;
+    if (this.regExpNotWordCharNoDigits.test(this.inputNode.value)) {
+      this.inputNode.placeholder = 'Invalid symbols or empty!';
+      return;
+    }
     const newTask = { isDone: false, contents: this.inputNode.value };
     this.fetchTemplate('new_task', newTask, 'POST');
     this.inputNode.value = "";
@@ -121,7 +127,7 @@ class ToDoApp {
    * @param {String} newContents 
    */
   editTask(id, newContents) {
-    if (newContents.length === 0) {
+    if (this.regExpNotWordCharNoDigits.test(newContents)) {
       this.getTasks();
       return;
     };

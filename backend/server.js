@@ -2,6 +2,7 @@ const express = require('express')
 var mongoose = require('mongoose');
 const app = express()
 const port = 3000
+const regExpNotWordCharNoDigits = /^$|^[\W\d]/;
 
 // CORS
 app.use(function (req, res, next) {
@@ -42,7 +43,7 @@ app.get('/to-do-list/backend', function (req, re, next) {
 })
 
 app.post('/to-do-list/backend/new_task', (req, res, next) => {
-  if (!req.body.contents) return;
+  if (regExpNotWordCharNoDigits.test(req.body.contents)) return;
 
   const newTask = new Task(req.body);
   newTask.save(err => {
@@ -52,10 +53,8 @@ app.post('/to-do-list/backend/new_task', (req, res, next) => {
 })
 
 app.put('/to-do-list/backend/:task_id', (req, res, next) => {
-  if (req.body.contents !== undefined && req.body.contents.length === 0) {
-    return;
-  };
-
+  if (req.body.contents !== undefined && regExpNotWordCharNoDigits.test(req.body.contents)) return;
+  
   Task.findById(req.params.task_id, function (err, task) {
     if (err) return handleError(err);
 
