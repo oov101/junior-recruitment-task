@@ -29,6 +29,11 @@
   input:focus {
     outline-width: 0;
   }
+
+  ::placeholder {
+    color: red;
+    opacity: 0.8;
+  }
 }
 
 .input-bar:before {
