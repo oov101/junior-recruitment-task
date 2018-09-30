@@ -126,7 +126,9 @@ class ToDoApp {
    * @param {Number} id 
    * @param {String} newContents 
    */
-  editTask(id, newContents) {
+  editTask(id, oldContents, newContents) {
+    if (oldContents === newContents) return;
+
     if (this.regExpNotWordCharNoDigits.test(newContents)) {
       this.getTasks();
       return;
@@ -179,7 +181,10 @@ class ToDoApp {
      * Adding event listeners for toggling, editing, deleting tasks
      */
     const addEventListenersToTaskElements = () => {
-      taskContentsNode.addEventListener('focusout', () => this.editTask(id, taskContentsNode.innerText));
+      taskContentsNode.addEventListener('click', () => {
+        const oldContents = taskContentsNode.innerText; 
+        taskContentsNode.addEventListener('focusout', () => this.editTask(id, oldContents, taskContentsNode.innerText));
+      });
       checkerNode.addEventListener('click', () => this.toggleTask(id, isDone));
       trashNode.addEventListener('click', () => this.deleteTask(id));
     };
